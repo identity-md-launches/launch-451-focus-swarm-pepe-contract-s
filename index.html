@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f5eb" />
+  <meta name="description" content="A read-only field guide to Swarm Pepe: who can claim, why the reveal waits, and how the art lives on Ethereum. Try the wallet-free reveal simulation." />
+  <title>Swarm Pepe Field Guide — Claim first. Meet Pepe later.</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#" aria-label="Swarm Pepe Field Guide home"><span class="brand-icon" aria-hidden="true">▦</span><span>Swarm Pepe<small>Field guide</small></span></a>
+    <nav aria-label="Main navigation"><a href="#claim">The claim</a><a href="#reveal">Reveal lab</a><a href="#artwork">The artwork</a><a href="#sources">Sources <span aria-hidden="true">↗</span></a></nav>
+    <span class="read-only"><span aria-hidden="true">●</span> Read-only by design</span>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-box" aria-hidden="true">01</span> A field guide to an Ethereum collectible</div>
+        <h1 id="hero-title">Claim first.<br>Meet Pepe <em>later.</em></h1>
+        <p class="intro">A small guide to the free claim, the waiting, and the artwork that lives on-chain. Start here, even if this is your first NFT.</p>
+        <a class="button primary" href="#reveal">Explore the reveal <span aria-hidden="true">↗</span></a>
+        <p class="safety-note"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 9V6a5 5 0 0 1 10 0v3M4 9h12v9H4zM10 12v3"/></svg>No wallet. No signatures. Just learning.</p>
+      </div>
+      <figure class="hero-study">
+        <div class="study-grid" aria-hidden="true"></div>
+        <div class="specimen specimen-back" aria-hidden="true"><div data-frog="5"></div></div>
+        <div class="specimen specimen-front" aria-hidden="true"><div data-frog="0"></div><span><b>Pepe, eventually.</b><i>✳</i></span></div>
+        <figcaption>Illustrative artwork · not a minted Swarm Pepe</figcaption>
+      </figure>
+    </section>
+    <div class="contract-strip wrap"><span class="mono">The contract · Ethereum</span><a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code" class="contract-address">0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb <span aria-hidden="true">↗</span></a><span class="small">Source reviewed · 29 Sep 2026</span></div>
+
+    <section class="section wrap" id="claim" aria-labelledby="claim-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / Before the pixels</p><h2 id="claim-title">From eligible to yours.</h2></div><p>An NFT is a unique token recorded on a blockchain. “Minting” creates that token; “revealing” makes its final artwork visible.</p></div>
+      <div class="steps">
+        <article class="step"><span class="step-number">01</span><h3>Be on the list.</h3><p>The contract owner assigns each wallet an allowance of up to <strong>3 claims</strong>. Owning an IMD NFT or paying for a swarm job does not automatically grant eligibility in the code.</p><a class="source-link" href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Contract: grant / grantEach ↗</a></article>
+        <article class="step"><span class="step-number">02</span><h3>Free means mint price.</h3><p>The claim has <strong>no mint payment</strong>. A real Ethereum transaction still costs gas, paid in ETH. The no-argument <code>claim()</code> takes your entire remaining allocation, not just one.</p><a class="source-link" href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Contract: claim / _claim ↗</a><a class="source-link" href="https://ethereum.org/en/developers/docs/gas/">Ethereum: gas fees ↗</a></article>
+        <article class="step"><span class="step-number">03</span><h3>Wait, then reveal.</h3><p>A claim records the minter and mint block. The artwork seed uses the <strong>next block’s hash</strong>—a fingerprint of a block that does not yet exist at mint time.</p><a class="source-link" href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Contract: _claim / reveal ↗</a></article>
+      </div>
+      <details class="detail-row"><summary>What else can stop a claim?<span aria-hidden="true">+</span></summary><div class="detail-body"><p>Minting must be open, the caller cannot be the contract owner, and the request must fit the wallet’s allowance, its lifetime limit of 3, and the collection limit of 5,000. A partial allocation can be claimed through <code>claim(amount)</code>. Transferring a Pepe away does not reset the mint count. These are code limits, not a report of current availability. <a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Source: remaining, _claim, MAX_SUPPLY ↗</a></p></div></details>
+      <aside class="creator-note"><span class="label">Creator’s statement</span><p>In a 25 September 2026 memo, the creator described an initial list of IMD NFT snapshot holders and swarm customers, with more wallets to be selected later. That is the creator’s selection policy; the contract enforces the allowance it is given. <a href="https://memoscan.io/memo/0x5a579214f4df9d8ec756e98717e86bb3dbc4ed6a4e4fd70e13599ba6d53ffbb2">Read the original memo ↗</a></p></aside>
+    </section>
+
+    <section class="lab-section" id="reveal" aria-labelledby="reveal-title">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">02 / The reveal lab</p><h2 id="reveal-title">You can’t preview<br>a block that hasn’t happened.</h2></div><div><span class="simulation-badge">Interactive simulation</span><p>If the hash were already known, someone could test inputs and pick a result. Compare that with waiting for a future block.</p></div></div>
+        <noscript><p class="noscript">Enable JavaScript to run the simulation. The guide and sources are still readable below.</p></noscript>
+        <div class="lab" id="lab" hidden>
+          <div class="lab-toolbar"><span class="mono">Experiment 01 / Known vs. future</span><button type="button" class="text-button" id="reset">Reset experiment <span aria-hidden="true">↺</span></button></div>
+          <div class="lab-controls"><fieldset id="token-options"><legend>Pick an example token</legend><div class="radio-group"><label><input type="radio" name="token" value="1" checked><span>#001</span></label><label><input type="radio" name="token" value="2"><span>#002</span></label><label><input type="radio" name="token" value="3"><span>#003</span></label></div></fieldset><p id="input-hint">Switch tokens. The known-hash preview changes; the future result stays unknown.</p></div>
+          <div class="comparison">
+            <article class="comparison-card known"><div class="card-heading"><h3>If the hash were known</h3><span class="label">Comparison only</span></div><div class="preview-row"><div id="known-art" class="pixel-preview"></div><div><span class="mono small">Preview available</span><p id="known-trait" class="trait"></p><p class="small">You could inspect the outcome before committing.</p></div></div><div class="hash-row"><span>Known hash</span><code>0x51a7c0de</code></div></article>
+            <article class="comparison-card future"><div class="card-heading"><h3>With a future blockhash</h3><span class="label">Contract pattern</span></div><div class="preview-row"><div id="future-art" class="pixel-preview mystery"></div><div><span class="mono small" id="future-label">No preview yet</span><p id="future-trait" class="trait">A mystery Pepe</p><p class="small" id="future-description">The missing input is a block that hasn’t happened.</p></div></div><div class="hash-row"><span>Future hash</span><code id="future-hash">Not created yet</code></div></article>
+          </div>
+          <ol class="block-timeline" aria-label="Simulated block timeline"><li id="block-100"><span>Block 100</span><strong>Commit</strong><small>Minter + token fixed</small></li><li id="block-101"><span>Block 101</span><strong>Hash appears</strong><small>The target block</small></li><li id="block-102"><span>Block 102</span><strong>Reveal can run</strong><small>Target is in the past</small></li></ol>
+          <div class="lab-action"><div><p class="action-title" id="stage-title">First, commit to an example.</p><p id="stage-description">Your choice is locked before the future hash exists.</p></div><button type="button" class="button primary" id="advance">Lock example <span aria-hidden="true">→</span></button></div>
+          <p class="sr-only" role="status" id="sim-status"></p>
+          <div class="takeaway" id="takeaway" hidden><strong>The order is the point.</strong><p>You committed first. The missing input arrived later. Resetting creates a separate pretend experiment; a real revealed token cannot be rerolled. <a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Contract: reveal ↗</a></p></div>
+        </div>
+        <p class="simulation-footnote"><strong>A model, not a mint.</strong> All tokens, hashes and artwork here are invented. This uses a toy mixing function, not the contract’s keccak256 or actual trait probabilities. Nothing is sent to Ethereum. Real token IDs are assigned by the contract, not selected from this menu. <a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Source: _claim / reveal ↗</a></p>
+        <div class="reveal-notes"><article><h3>What the code guarantees</h3><p>A mint in block B targets B+1 and can first reveal at B+2. The seed combines that hash, the token ID, the original minter and this contract’s address. Anyone can trigger the reveal, and a stored seed stays fixed. <a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Source: reveal ↗</a></p></article><article><h3>What the demo doesn’t prove</h3><p>It shows why an ordinary minter cannot preview the final traits at mint time. It does not prove perfect randomness or rule out influence by block producers. The creator’s stronger anti-grinding claim is not a security audit. <a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#block-and-transaction-properties">Solidity’s randomness warning ↗</a></p></article></div>
+        <details class="detail-row"><summary>Will the reveal always happen automatically?<span aria-hidden="true">+</span></summary><div class="detail-body"><p>The creator says a bot handles reveals. The contract itself needs a reveal transaction; it cannot schedule one. Anyone may call it, so it is not restricted to the creator or the token owner. A bot’s availability has not been checked here. <a href="https://memoscan.io/memo/0x5a579214f4df9d8ec756e98717e86bb3dbc4ed6a4e4fd70e13599ba6d53ffbb2">Creator memo ↗</a> · <a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Contract: reveal / revealableAt ↗</a></p><p>The contract’s Blockhash helper can use Ethereum’s extended history (up to 8,191 blocks), beyond the native 256-block window. If the fixed target hash is unavailable, the token stays unrevealed; there is no substitute hash or reroll. A timely reveal matters. <a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Source: Blockhash.sol / reveal ↗</a></p></div></details>
+      </div>
+    </section>
+
+    <section class="section wrap art-section" id="artwork" aria-labelledby="art-title">
+      <div class="art-diagram"><div class="eyebrow">A real on-chain render</div><div class="art-pixel"><img src="./swarm-pepe-1.svg" width="480" height="480" alt="Swarm Pepe number 1: green pixel frog on purple, with side-facing eyes, a cigarette and a gold chain." loading="lazy"></div><div class="art-flow"><span>Seed</span><b aria-hidden="true">→</b><span>SVG pixels</span><b aria-hidden="true">→</b><span>Pepe</span></div><p class="small">Swarm Pepe #1 · captured 29 Sep 2026<br><a href="https://etherscan.io/nft/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb/1">View token #1 ↗</a></p><div class="diagram-corner" aria-hidden="true">+</div></div>
+      <div class="art-copy"><p class="eyebrow">03 / No image server needed</p><h2 id="art-title">The pixels live<br>with the code.</h2><p>The token’s <code>tokenURI</code> returns its description and image as embedded data. The image is an SVG: a picture drawn from shapes, rather than fetched from an image server. <a class="source-link" href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">Contract: tokenURI ↗</a></p><p>A separate on-chain <strong>PixelArt</strong> contract turns the seed into a 24 × 24 grid of colored rectangles. Skin, eyes, mouth, hat and accessory all come from that seed. Swarm Pepe’s reference to this renderer is fixed at deployment. <a class="source-link" href="https://etherscan.io/address/0x07fd9841eeb6a359efb30f861d59bfa1f6b03fca#code">PixelArt: renderSVG / attributes ↗</a><a class="source-link" href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code">SwarmPepe: immutable ART ↗</a></p><div class="plain-note"><span aria-hidden="true">↳</span><p><strong>In plain language:</strong> the contract contains the recipe for the picture. A marketplace displays that picture; it does not supply the artwork file.</p></div></div>
+    </section>
+
+    <section class="sources-section wrap" id="sources" aria-labelledby="sources-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / Check the field notes</p><h2 id="sources-title">Facts deserve footnotes.</h2></div><p>Code describes the rules. A creator’s memo describes intentions. This guide keeps the two separate.</p></div>
+      <div class="source-list"><a href="https://etherscan.io/address/0x999ce0ce8c5f7661e0c74a568ffe27ceb9177bdb#code"><span class="source-index">01</span><span><strong>SwarmPepe verified source</strong><small>Allowance, claim, supply limits, seed and reveal · Etherscan</small></span><span class="source-tag">Contract code</span><span aria-hidden="true">↗</span></a><a href="https://etherscan.io/address/0x07fd9841eeb6a359efb30f861d59bfa1f6b03fca#code"><span class="source-index">02</span><span><strong>PixelArt verified source</strong><small>The renderer referenced by the constructor · Etherscan</small></span><span class="source-tag">Contract code</span><span aria-hidden="true">↗</span></a><a href="https://memoscan.io/memo/0x5a579214f4df9d8ec756e98717e86bb3dbc4ed6a4e4fd70e13599ba6d53ffbb2"><span class="source-index">03</span><span><strong>The creator’s launch memo</strong><small>Selection policy, reveal bot and anti-grinding claims · 25 Sep 2026</small></span><span class="source-tag creator">Creator statement</span><span aria-hidden="true">↗</span></a><a href="https://eips.ethereum.org/EIPS/eip-2935"><span class="source-index">04</span><span><strong>Ethereum’s blockhash history</strong><small>The extended history used by the contract’s Blockhash helper</small></span><span class="source-tag">Technical context</span><span aria-hidden="true">↗</span></a></div>
+      <p class="source-disclaimer">“Verified source” means Etherscan has matched published code to deployed bytecode. It does not mean independently audited. This is a source-based guide, not a live eligibility, supply or bot-status checker. <a href="https://ethereum.org/en/developers/docs/smart-contracts/verifying/">About source verification ↗</a></p>
+    </section>
+  </main>
+  <footer class="wrap"><a class="brand footer-brand" href="#">Swarm Pepe <span>Field guide</span></a><p>Made for the curious. Read-only, all the way down.</p><a href="#main">Back to top ↑</a></footer>
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>

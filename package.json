@@ -1,0 +1,17 @@
+{
+  "name": "swarm-pepe-field-guide",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node tests/run.mjs"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "7.3.1"
+  }
+}

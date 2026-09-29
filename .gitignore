@@ -1,0 +1,9 @@
+# Budget: 512 bytes; see artifacts/path-budget.md. Keep dist/ included.
+**/node_modules/
+**/.vite/
+**/.cache/
+**/.npm/
+**/.pnpm-store/
+**/.yarn/cache/
+.playwright-mcp/
+test/scratch/
